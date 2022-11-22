@@ -29,5 +29,6 @@ class CharactersProvider extends ChangeNotifier {
   getCharacters() async {
     final jsonData = await _getJsonData('/api/character');
     print(jsonData);
+    print(jsonData is String);
   }
 }
