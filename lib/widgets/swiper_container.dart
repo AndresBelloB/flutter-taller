@@ -29,7 +29,24 @@ class SwiperContainer extends StatelessWidget {
       height: size.height * 0.5,
       child: Swiper(
         itemCount: characters.length, //* la cantidad de cards
-        )
+        layout: SwiperLayout.STACK,
+        itemWidth: size.width * 0.77,
+        itemHeight: size.height * 0.42,
+        itemBuilder: (context, index) {
+          final character = characters[index];
+          return GestureDetector(
+            onTap: () => {},
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                placeholder: const AssetImage('assets/no-image.jpg'),
+                image: NetworkImage(character.image),
+                fit: BoxFit.fill
+                )
+            ),
+          );
+        },
+      )
     );
   }
 }
