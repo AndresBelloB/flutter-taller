@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:rickandmortyapi/models/character.dart';
 
 class CharactersResponse {
+  
     CharactersResponse({
         required this.info,
         required this.results,

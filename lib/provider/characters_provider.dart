@@ -1,10 +1,15 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:rickandmortyapi/models/character.dart';
+import 'package:rickandmortyapi/models/characters_response.dart';
 
 class CharactersProvider extends ChangeNotifier {
 
   final String _baseUrl = 'rickandmortyapi.com';
+
+  //* Listas
+  List<Character> charactersResult = [];
   int _page = 0;
 
   CharactersProvider(){
@@ -29,6 +34,13 @@ class CharactersProvider extends ChangeNotifier {
   getCharacters() async {
     final jsonData = await _getJsonData('/api/character');
     print(jsonData);
-    print(jsonData is String);
+    print(jsonData is String); //* True
+
+    final charactersResponse = CharactersResponse.fromJson(jsonData);
+
+    charactersResult = charactersResponse.results;
+    //* les avisa a los widgets que estan escuchando que sucede con la data en caso de cambios y los widgets que estan escuchando se vuelven a renderizar o redibujar
+    notifyListeners();
+    
   }
 }
