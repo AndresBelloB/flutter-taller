@@ -37,8 +37,9 @@ class CharactersProvider extends ChangeNotifier {
     print(jsonData is String); //* True
 
     final charactersResponse = CharactersResponse.fromJson(jsonData);
-
+    
     charactersResult = charactersResponse.results;
+    
     //* les avisa a los widgets que estan escuchando que sucede con la data en caso de cambios y los widgets que estan escuchando se vuelven a renderizar o redibujar
     notifyListeners();
     
