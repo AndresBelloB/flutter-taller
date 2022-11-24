@@ -24,10 +24,13 @@ class _CharacterSliderState extends State<CharacterSlider> {
     super.initState();
     //* El scrollController nos permite crear en el initState un listener
     scrollController.addListener(() { 
-     
+      if(scrollController.position.pixels >= scrollController.position.maxScrollExtent - 500) {
+          widget.onNextPage();
+      }
+         print(scrollController.position.pixels);
+         print(scrollController.position.maxScrollExtent);
     });
-    print(scrollController.position.pixels);
-    print(scrollController.position.maxScrollExtent);
+
   }
   @override
   Widget build(BuildContext context) {
@@ -43,9 +46,10 @@ class _CharacterSliderState extends State<CharacterSlider> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: widget.characters.length,
+              controller: scrollController,
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => ,
+              itemCount: widget.characters.length,
+              itemBuilder: (context, index) => _CharacterPoster(character: widget.characters[index]),
               )
           )
         ],

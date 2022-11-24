@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
             CharacterSlider(
               characters: getCharacterProvider.nextCharacters, 
               title: 'Personajes', 
-              onNextPage: getCharacterProvider.getNextCharacters()
+              onNextPage: () => getCharacterProvider.getNextCharacters()
             )
           ],
         )
