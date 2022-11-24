@@ -22,7 +22,7 @@ class _CharacterSliderState extends State<CharacterSlider> {
   @override
   void initState() {
     super.initState();
-
+    //* El scrollController nos permite crear en el initState un listener
     scrollController.addListener(() { 
      
     });
@@ -32,7 +32,59 @@ class _CharacterSliderState extends State<CharacterSlider> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('character slider'),
+      width: double.infinity, //* para que tome todo el ancho posible
+      height: 260,
+      child: Column(
+        children: [
+          if(widget.title != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(widget.title!, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: widget.characters.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => ,
+              )
+          )
+        ],
+      )
+    );
+  }
+}
+
+//* Poster del Personaje
+
+class _CharacterPoster extends StatelessWidget {
+
+  const _CharacterPoster({super.key, required this.character});
+  final Character character;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 130,
+      height: 190,
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () => {},
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20), // * ClipRRect nos permite agregar bordes rendondeados
+              child: FadeInImage(
+                placeholder: const AssetImage('assets/no-image.jpg'),
+                image: NetworkImage(character.image),
+                width: 130,
+                height: 190,
+                fit: BoxFit.cover
+              ),
+            )
+          ),
+          Text(character.name)
+        ]
+      )
     );
   }
 }
