@@ -10,10 +10,12 @@ class CharactersProvider extends ChangeNotifier {
 
   //* Listas
   List<Character> charactersResult = [];
+  List<Character> nextCharacters = [];
   int _page = 0;
 
   CharactersProvider(){
     getCharacters();
+    getNextCharacters();
   }
   //* argumentos posicionales son obligatorios por defecto por el page lo hicimos opcional
   Future<String> _getJsonData(String segmentUrl, [int page = 1]) async {
@@ -39,9 +41,19 @@ class CharactersProvider extends ChangeNotifier {
     final charactersResponse = CharactersResponse.fromJson(jsonData);
     
     charactersResult = charactersResponse.results;
-    
+
     //* les avisa a los widgets que estan escuchando que sucede con la data en caso de cambios y los widgets que estan escuchando se vuelven a renderizar o redibujar
     notifyListeners();
     
   }
-}
+
+  getNextCharacters() async {
+    _page++;
+    final jsonData = await _getJsonData('/api/character', _page);
+    final responseNextCharacters = CharactersResponse.fromJson(jsonData);
+    // nextCharacters = responseNextCharacters.results;
+    nextCharacters = [...nextCharacters, ...responseNextCharacters.results];
+    notifyListeners();
+
+  }
+} 

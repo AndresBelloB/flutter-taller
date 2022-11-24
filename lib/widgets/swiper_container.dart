@@ -41,7 +41,7 @@ class SwiperContainer extends StatelessWidget {
               child: FadeInImage(
                 placeholder: const AssetImage('assets/no-image.jpg'),
                 image: NetworkImage(character.image),
-                fit: BoxFit.fill
+                fit: BoxFit.fill //* forzamos a la imagen que se adecue al contenedor
                 )
             ),
           );

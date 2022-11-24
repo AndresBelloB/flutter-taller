@@ -10,7 +10,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final getCharacterProvider = Provider.of<CharactersProvider>(context, listen: true);
+    // getCharacterProvider.nextCharacters;
     // print(getCharacterProvider.charactersResult);
+    // getCharacterProvider.getNextCharacters();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Rick and Morty"),
@@ -25,7 +27,12 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SwiperContainer(characters: getCharacterProvider.charactersResult)
+            SwiperContainer(characters: getCharacterProvider.charactersResult),
+            CharacterSlider(
+              characters: getCharacterProvider.nextCharacters, 
+              title: 'Personajes', 
+              onNextPage: getCharacterProvider.getNextCharacters()
+            )
           ],
         )
       )
