@@ -17,6 +17,11 @@ class DetailPage extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate([
               _PosterAndTitle(character),
+              _Overview(),
+              _Overview(),
+              _Overview(),
+              _Overview(),
+              _Overview(),
             ]))
         ],
       ),
@@ -109,6 +114,23 @@ class _PosterAndTitle extends StatelessWidget {
             ],
           )
         ]
+        ),
+    );
+  }
+}
+
+//* Que van los textos de relleno
+
+class _Overview extends StatelessWidget {
+  
+  @override
+  Widget build(BuildContext context) {
+   
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      child: const Text(
+        "Cupidatat velit cupidatat dolor minim. Labore officia laboris commodo minim irure sit dolor est nulla magna aute pariatur velit. Labore voluptate proident pariatur tempor eiusmod anim in ipsum laborum veniam minim sit.",
+        textAlign: TextAlign.justify,
         ),
     );
   }
