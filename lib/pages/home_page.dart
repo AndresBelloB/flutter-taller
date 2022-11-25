@@ -32,7 +32,9 @@ class HomePage extends StatelessWidget {
               characters: getCharacterProvider.nextCharacters, 
               title: 'Personajes', 
               onNextPage: () => getCharacterProvider.getNextCharacters()
-            )
+            ),
+
+
           ],
         )
       )

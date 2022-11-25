@@ -75,7 +75,7 @@ class _CharacterPoster extends StatelessWidget {
       child: Column(
         children: [
           GestureDetector(
-            onTap: () => {},
+            onTap: () => Navigator.pushNamed(context, 'detail', arguments: character),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20), // * ClipRRect nos permite agregar bordes rendondeados
               child: FadeInImage(
