@@ -69,8 +69,9 @@ class _PosterAndTitle extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final size = MediaQuery.of(context).size;
-
+    final size = MediaQuery.of(context).size; //* el tamaño del dispositivo
+    print(size);
+    print(size.width);
   
     return Container(
       margin: const EdgeInsets.only(top: 20),
@@ -80,7 +81,7 @@ class _PosterAndTitle extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: FadeInImage(
-              placeholder: AssetImage('assets/no-image.jpg'),
+              placeholder: const AssetImage('assets/no-image.jpg'),
               image: NetworkImage(character.image),
               height: 150,
               width: 110,
@@ -89,11 +90,21 @@ class _PosterAndTitle extends StatelessWidget {
           ),
          const SizedBox(width: 20),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(character.name, style: textTheme.headline5, overflow: TextOverflow.ellipsis),
+              ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: size.width - 170) ,
+                child: Text(
+                  character.name, 
+                  style: textTheme.headline5, 
+                  overflow: TextOverflow.ellipsis, 
+                  maxLines: 2)
+              ),
+              Text(character.gender, style: textTheme.subtitle1, overflow: TextOverflow.ellipsis,),
               Row(children: [
-                const Icon(Icons.photo_album_outlined, size: 30, color: Colors.green),
-                 Text(character.location.name, style: textTheme.caption)
+                const Icon(Icons.photo_album_outlined, size: 15, color: Colors.green),
+                const SizedBox(width: 5),
+                Text(character.location.name, style: textTheme.caption)
               ])
             ],
           )
