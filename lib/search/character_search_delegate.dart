@@ -55,7 +55,7 @@ class CharacterSearchDelegate extends SearchDelegate {
 
         return ListView.builder(
           itemCount: characters.length,
-          itemBuilder: (context, index) => _CharacterItem(),
+          itemBuilder: (context, index) => _CharacterItem(character: characters[index]),
         );
       },
     );
