@@ -17,7 +17,7 @@ class CharactersProvider extends ChangeNotifier {
     getCharacters();
     getNextCharacters();
   }
-  //* argumentos posicionales son obligatorios por defecto por el page lo hicimos opcional
+  //* argumentos posicionales son obligatorios por defecto por el page lo hicimos opcional app
   Future<String> _getJsonData(String segmentUrl, [int page = 1]) async {
 
     //* Construyendo la url de la petición
