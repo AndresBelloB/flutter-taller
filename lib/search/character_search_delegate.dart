@@ -1,5 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rickandmortyapi/models/character.dart';
+import 'package:rickandmortyapi/provider/characters_provider.dart';
 
 class CharacterSearchDelegate extends SearchDelegate {
 
@@ -40,7 +43,22 @@ class CharacterSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Text("buildResults");
+    final providerSearchCharacter = Provider.of<CharactersProvider>(context, listen: false);
+
+    return FutureBuilder(
+      future: providerSearchCharacter.searchCharacters(query),
+      builder:(context, AsyncSnapshot<List<Character>> snapshot) {
+        //* Si no hay data
+        if(!snapshot.hasData) return _emptyContainer();
+
+        final characters = snapshot.data!; //* characteres es una lista con todos los personajes
+
+        return ListView.builder(
+          itemCount: characters.length,
+          itemBuilder: (context, index) => _CharacterItem(),
+        );
+      },
+    );
   }
 
   @override
@@ -50,7 +68,7 @@ class CharacterSearchDelegate extends SearchDelegate {
     return Center(
      child: Column(
       children: [
-        const SizedBox(height: 80),
+        const SizedBox(height: 70),
         const Image(image: AssetImage('assets/giphy.gif'),),
         Text(
           "Buscando personaje: $query", 
@@ -65,4 +83,25 @@ class CharacterSearchDelegate extends SearchDelegate {
     
   }
 
+}
+
+class _CharacterItem extends StatelessWidget {
+  const _CharacterItem({super.key, required this.character });
+  final Character character;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: FadeInImage(
+        placeholder: const AssetImage('assets/no-image.jpg'),
+        image: NetworkImage(character.image),
+        width: 60,
+        fit: BoxFit.contain
+      ),
+      title: Text(character.name),
+      subtitle: Text(character.status),
+      onTap: () => Navigator.pushNamed(context, 'detail', arguments: character)
+
+    );
+  }
 }
