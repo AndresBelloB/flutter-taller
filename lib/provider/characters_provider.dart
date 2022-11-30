@@ -69,6 +69,10 @@ class CharactersProvider extends ChangeNotifier {
 
     //* Realizamos la petición
     final response = await http.get(url);
+
+    if(response.statusCode != 200) {
+      return [];
+    }
     //* response.body; //* JSON DE STRING
     final searchResponse = SearchCharacters.fromJson(response.body);
     return searchResponse.results;

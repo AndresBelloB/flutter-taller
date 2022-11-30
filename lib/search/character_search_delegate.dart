@@ -53,6 +53,18 @@ class CharacterSearchDelegate extends SearchDelegate {
 
         final characters = snapshot.data!; //* characteres es una lista con todos los personajes
 
+        if(characters.isEmpty) return const Center(child: Text('No existe tal personaje en la serie', style: TextStyle(fontSize: 20)));
+        // if(characters.isEmpty) {
+        //   return Center(
+        //     child: Column(
+        //       children: [
+        //         Text('No existe tal personaje en la serie', style: TextStyle(fontSize: 20)),
+        //         Image(image: AssetImage('assets/no-image.jpg'))
+        //       ],
+        //     )
+        //     );
+        // }
+
         return ListView.builder(
           itemCount: characters.length,
           itemBuilder: (context, index) => _CharacterItem(character: characters[index]),
