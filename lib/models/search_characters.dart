@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:rickandmortyapi/models/character.dart';
 
-class CharactersResponse {
+class SearchCharacters {
   
-    CharactersResponse({
+    SearchCharacters({
         // required this.info,
         required this.results,
     });
@@ -11,9 +11,9 @@ class CharactersResponse {
     // Info info;
     List<Character> results;
 
-    factory CharactersResponse.fromJson(String str) => CharactersResponse.fromMap(json.decode(str));
+    factory SearchCharacters.fromJson(String str) => SearchCharacters.fromMap(json.decode(str));
 
-    factory CharactersResponse.fromMap(Map<String, dynamic> json) => CharactersResponse(
+    factory SearchCharacters.fromMap(Map<String, dynamic> json) => SearchCharacters(
         // info: Info.fromMap(json["info"]),
         results: List<Character>.from(json["results"].map((x) => Character.fromMap(x))),
     );

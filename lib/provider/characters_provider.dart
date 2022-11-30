@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:rickandmortyapi/models/character.dart';
 import 'package:rickandmortyapi/models/characters_response.dart';
+import 'package:rickandmortyapi/models/search_characters.dart';
 
 class CharactersProvider extends ChangeNotifier {
 
@@ -55,5 +56,22 @@ class CharactersProvider extends ChangeNotifier {
     nextCharacters = [...nextCharacters, ...responseNextCharacters.results];
     notifyListeners();
 
+  }
+
+  //* para realizar la busqueda
+  Future<List<Character>> searchCharacters(String query) async {
+
+    //* https://rickandmortyapi.com/api/character?name=rick
+
+    final url = Uri.https(_baseUrl, "/api/character", {
+      'name': query
+    });
+
+    //* Realizamos la petición
+    final response = await http.get(url);
+    //* response.body; //* JSON DE STRING
+    final searchResponse = SearchCharacters.fromJson(response.body);
+    return searchResponse.results;
+    
   }
 } 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rickandmortyapi/provider/characters_provider.dart';
+import 'package:rickandmortyapi/search/character_search_delegate.dart';
 import 'package:rickandmortyapi/widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
@@ -19,7 +20,7 @@ class HomePage extends StatelessWidget {
         elevation: 10,
         actions: [
           IconButton(
-            onPressed: (){},
+            onPressed: () => showSearch(context: context, delegate: CharacterSearchDelegate()),
             icon: const Icon(Icons.search_outlined)
           )
         ],
