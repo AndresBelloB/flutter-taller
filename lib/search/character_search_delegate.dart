@@ -103,12 +103,16 @@ class _CharacterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    character.characterId = 'search-${character.id}';
     return ListTile(
-      leading: FadeInImage(
-        placeholder: const AssetImage('assets/no-image.jpg'),
-        image: NetworkImage(character.image),
-        width: 60,
-        fit: BoxFit.contain
+      leading: Hero(
+        tag: character.characterId!,
+        child: FadeInImage(
+          placeholder: const AssetImage('assets/no-image.jpg'),
+          image: NetworkImage(character.image),
+          width: 60,
+          fit: BoxFit.contain
+        ),
       ),
       title: Text(character.name),
       subtitle: Text(character.status),

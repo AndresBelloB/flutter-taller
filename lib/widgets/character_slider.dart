@@ -50,7 +50,9 @@ class _CharacterSliderState extends State<CharacterSlider> {
               controller: scrollController,
               scrollDirection: Axis.horizontal,
               itemCount: widget.characters.length,
-              itemBuilder: (context, index) => _CharacterPoster(character: widget.characters[index]),
+              itemBuilder: (context, index) => _CharacterPoster(
+                character: widget.characters[index], 
+                characterId: '${widget.title}-${index}-${widget.characters[index].id}',),
               )
           )
         ],
@@ -63,11 +65,12 @@ class _CharacterSliderState extends State<CharacterSlider> {
 
 class _CharacterPoster extends StatelessWidget {
 
-  const _CharacterPoster({super.key, required this.character});
+  const _CharacterPoster({super.key, required this.character, required this.characterId});
   final Character character;
-
+  final String characterId;
   @override
   Widget build(BuildContext context) {
+    character.characterId = characterId;
     return Container(
       width: 130,
       height: 190,
@@ -76,14 +79,17 @@ class _CharacterPoster extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () => Navigator.pushNamed(context, 'detail', arguments: character),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20), // * ClipRRect nos permite agregar bordes rendondeados
-              child: FadeInImage(
-                placeholder: const AssetImage('assets/no-image.jpg'),
-                image: NetworkImage(character.image),
-                width: 130,
-                height: 190,
-                fit: BoxFit.cover
+            child: Hero(
+              tag: character.characterId!,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20), // * ClipRRect nos permite agregar bordes rendondeados
+                child: FadeInImage(
+                  placeholder: const AssetImage('assets/no-image.jpg'),
+                  image: NetworkImage(character.image),
+                  width: 130,
+                  height: 190,
+                  fit: BoxFit.cover
+                ),
               ),
             )
           ),

@@ -83,14 +83,17 @@ class _PosterAndTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: FadeInImage(
-              placeholder: const AssetImage('assets/no-image.jpg'),
-              image: NetworkImage(character.image),
-              height: 150,
-              width: 110,
-              fit: BoxFit.cover
+          Hero(
+            tag: character.characterId!, //* el detalle es que recibe los id unicos tanto del swiper como del slider
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                placeholder: const AssetImage('assets/no-image.jpg'),
+                image: NetworkImage(character.image),
+                height: 150,
+                width: 110,
+                fit: BoxFit.cover
+              ),
             ),
           ),
          const SizedBox(width: 20),

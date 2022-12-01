@@ -34,15 +34,19 @@ class SwiperContainer extends StatelessWidget {
         itemHeight: size.height * 0.42,
         itemBuilder: (context, index) {
           final character = characters[index];
+          character.characterId = 'swiper-${character.id}';
           return GestureDetector(
             onTap: () => Navigator.pushNamed(context, 'detail', arguments: character),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: FadeInImage(
-                placeholder: const AssetImage('assets/no-image.jpg'),
-                image: NetworkImage(character.image),
-                fit: BoxFit.fill //* forzamos a la imagen que se adecue al contenedor
-                )
+            child: Hero(
+              tag: character.characterId!,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: FadeInImage(
+                  placeholder: const AssetImage('assets/no-image.jpg'),
+                  image: NetworkImage(character.image),
+                  fit: BoxFit.fill //* forzamos a la imagen que se adecue al contenedor
+                  )
+              ),
             ),
           );
         },
