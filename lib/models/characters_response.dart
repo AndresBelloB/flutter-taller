@@ -1,23 +1,22 @@
 import 'dart:convert';
-import 'package:rickandmortyapi/models/character.dart';
+import 'package:rickandmortyapi/models/photos.dart';
 
-class CharactersResponse {
-  
-    CharactersResponse({
-        // required this.info,
-        required this.results,
-    });
+class PhotosResponse {
+  PhotosResponse({
+    // required this.info,
+    required this.results,
+  });
 
-    // Info info;
-    List<Character> results;
+  // Info info;
+  List<Photos> results;
 
-    factory CharactersResponse.fromJson(String str) => CharactersResponse.fromMap(json.decode(str));
+  factory PhotosResponse.fromJson(String str) =>
+      PhotosResponse.fromMap(json.decode(str));
 
-    factory CharactersResponse.fromMap(Map<String, dynamic> json) => CharactersResponse(
+  factory PhotosResponse.fromMap(List<dynamic> json) => PhotosResponse(
         // info: Info.fromMap(json["info"]),
-        results: List<Character>.from(json["results"].map((x) => Character.fromMap(x))),
-    );
-
+        results: List<Photos>.from(json.map((x) => Photos.fromMap(x))),
+      );
 }
 
 // class Info {

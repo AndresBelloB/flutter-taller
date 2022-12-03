@@ -2,22 +2,22 @@ import 'dart:convert';
 import 'package:rickandmortyapi/models/character.dart';
 
 class SearchCharacters {
-  
-    SearchCharacters({
-        // required this.info,
-        required this.results,
-    });
+  SearchCharacters({
+    // required this.info,
+    required this.results,
+  });
 
-    // Info info;
-    List<Character> results;
+  // Info info;
+  List<Photo> results;
 
-    factory SearchCharacters.fromJson(String str) => SearchCharacters.fromMap(json.decode(str));
+  factory SearchCharacters.fromJson(String str) =>
+      SearchCharacters.fromMap(json.decode(str));
 
-    factory SearchCharacters.fromMap(Map<String, dynamic> json) => SearchCharacters(
+  factory SearchCharacters.fromMap(Map<String, dynamic> json) =>
+      SearchCharacters(
         // info: Info.fromMap(json["info"]),
-        results: List<Character>.from(json["results"].map((x) => Character.fromMap(x))),
-    );
-
+        results: List<Photo>.from(json["results"].map((x) => Photo.fromMap(x))),
+      );
 }
 
 // class Info {

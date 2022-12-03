@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rickandmortyapi/provider/characters_provider.dart';
-import 'package:rickandmortyapi/search/character_search_delegate.dart';
+import 'package:rickandmortyapi/provider/photos_provider.dart';
 import 'package:rickandmortyapi/widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,36 +8,50 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final getCharacterProvider = Provider.of<CharactersProvider>(context, listen: true);
+    final getCharacterProvider =
+        Provider.of<PhotosProvider>(context, listen: true);
     // getCharacterProvider.nextCharacters;
     // print(getCharacterProvider.charactersResult);
     // getCharacterProvider.getNextCharacters();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Rick and Morty"),
-        elevation: 10,
-        actions: [
-          IconButton(
-            onPressed: () => showSearch(context: context, delegate: CharacterSearchDelegate()),
-            icon: const Icon(Icons.search_outlined)
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
+        drawer: Drawer(
+            child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
           children: [
-            SwiperContainer(characters: getCharacterProvider.charactersResult),
-            CharacterSlider(
-              characters: getCharacterProvider.nextCharacters, 
-              title: 'Personajes', 
-              onNextPage: () => getCharacterProvider.getNextCharacters()
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
+              ),
+              child: Text(
+                'Menu de usuarios',
+                style: TextStyle(color: Colors.white, fontSize: 22),
+              ),
             ),
-
-
+            ListTile(
+              title: const Text('Ir a listado de usuarios'),
+              onTap: () {
+                Navigator.pushNamed(context, 'users');
+              },
+            ),
           ],
-        )
-      )
-    );
+        )),
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text(
+            "App Photos",
+          ),
+          elevation: 10,
+        ),
+        body: SingleChildScrollView(
+            child: Column(
+          children: [
+            SwiperContainer(photos: getCharacterProvider.photosResult),
+            CharacterSlider(
+              photos: getCharacterProvider.photosResult,
+              title: 'Photos totales',
+            ),
+          ],
+        )));
   }
 }
